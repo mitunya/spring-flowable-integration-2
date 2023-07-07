@@ -6,13 +6,13 @@
 In this tutorial, we will be integrating Flowable's BPM engine into our Spring Boot application.
 
 ## License
-The MIT License (MIT)  
+The MIT License (MIT)
 
-Copyright (c) 2020, canchito-dev  
+Copyright (c) 2020, canchito-dev
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -43,45 +43,45 @@ For all Spring applications, it is always a good idea to start with the [Spring 
 The following listing shows the `pom.xml` file that is created when you choose Maven:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>  
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>  
-	<parent> <groupId>org.springframework.boot</groupId>  
-		<artifactId>spring-boot-starter-parent</artifactId>  
-		<version>2.2.7.RELEASE</version>  
-		<relativePath/> <!-- lookup parent from repository -->  
-	</parent>  
-	<groupId>com.canchitodev.example</groupId>  
-	<artifactId>spring-flowable-integration</artifactId>  
-	<version>0.0.1-SNAPSHOT</version>  
-	<packaging>war</packaging>  
-  
-	<name>spring-flowable-integration</name>  
-	<description>Demo project for Spring Boot using Flowable BPM</description>  
-  
-	<organization> <name>Canchito Development</name>  
-		<url>http://www.canchito-dev.com</url>  
-	</organization>  
-	<issueManagement> <system>Canchito Development</system>  
-		<url>https://github.com/canchito-dev/spring-flowable-integration/issues</url>  
-	</issueManagement>  
+	<modelVersion>4.0.0</modelVersion>
+	<parent> <groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.7.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.canchitodev.example</groupId>
+	<artifactId>spring-flowable-integration</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>spring-flowable-integration</name>
+	<description>Demo project for Spring Boot using Flowable BPM</description>
+
+	<organization> <name>Canchito Development</name>
+		<url>http://www.canchito-dev.com</url>
+	</organization>
+	<issueManagement> <system>Canchito Development</system>
+		<url>https://github.com/canchito-dev/spring-flowable-integration/issues</url>
+	</issueManagement>
 	<url>https://github.com/canchito-dev/spring-flowable-integration</url>
-	
+
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>  
-		<java.version>1.8</java.version>  
-		<flowable.version>6.5.0</flowable.version>  
-	</properties>  
- 
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<flowable.version>6.5.0</flowable.version>
+	</properties>
+
 	<dependencies>
-		<!-- Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container -->  
+		<!-- Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container -->  
-		
+		<!-- Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container -->
+
 		<!-- H2 Database Engine -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -89,37 +89,37 @@ The following listing shows the `pom.xml` file that is created when you choose M
 			<scope>runtime</scope>
 		</dependency>
 		<!-- H2 Database Engine -->
-		
+
 		<!-- Starter for using Tomcat as the embedded servlet container. Default servlet container starter used by spring-boot-starter-web -->
-		<dependency>  
-			<groupId>org.springframework.boot</groupId>  
-			<artifactId>spring-boot-starter-tomcat</artifactId>  
-		</dependency>  
-		<!-- Starter for using Tomcat as the embedded servlet container. Default servlet container starter used by spring-boot-starter-web -->  
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+		<!-- Starter for using Tomcat as the embedded servlet container. Default servlet container starter used by spring-boot-starter-web -->
 
-		<!-- Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito -->  
-		<dependency>  
-			<groupId>org.springframework.boot</groupId>  
-			<artifactId>spring-boot-starter-test</artifactId>  
-			<scope>test</scope>  
-			<exclusions> 
-				<exclusion> 
-					<groupId>org.junit.vintage</groupId>  
-					<artifactId>junit-vintage-engine</artifactId>  
-				</exclusion> 
-			</exclusions> 
-		</dependency>  
-		<!-- Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito -->  
-	</dependencies>  
+		<!-- Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito -->
+	</dependencies>
 
-	<build> 
-		<plugins> 
-			<plugin> 
-				<groupId>org.springframework.boot</groupId>  
-				<artifactId>spring-boot-maven-plugin</artifactId>  
-			</plugin> 
-		</plugins> 
-	</build>  
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
 ```
 
@@ -153,24 +153,24 @@ And inside the folder _src/main/resources/processes_, create a file named _one-t
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:flowable="http://flowable.org/bpmn" targetNamespace="Examples">
-	<process id="oneTaskProcess" name="The One Task Process"> 
-		<startEvent id="theStart" /> 
-		<sequenceFlow id="flow1" sourceRef="theStart" targetRef="theTask" /> 
-		<userTask id="theTask" name="my task" flowable:assignee="kermit" /> 
-		<sequenceFlow id="flow2" sourceRef="theTask" targetRef="theEnd" /> 
-		<endEvent id="theEnd" /> 
-	</process> 
+	<process id="oneTaskProcess" name="The One Task Process">
+		<startEvent id="theStart" />
+		<sequenceFlow id="flow1" sourceRef="theStart" targetRef="theTask" />
+		<userTask id="theTask" name="my task" flowable:assignee="kermit" />
+		<sequenceFlow id="flow2" sourceRef="theTask" targetRef="theEnd" />
+		<endEvent id="theEnd" />
+	</process>
 </definitions>
 ```
 
 Ok, now you can run you application:
 
 ```java
-@SpringBootApplication  
-public class SpringFlowableIntegrationApplication {  
-   public static void main(String[] args) {  
-      SpringApplication.run(SpringFlowableIntegrationApplication.class, args);  
-  }   
+@SpringBootApplication
+public class SpringFlowableIntegrationApplication {
+   public static void main(String[] args) {
+      SpringApplication.run(SpringFlowableIntegrationApplication.class, args);
+  }
 }
 ```
 
@@ -272,30 +272,30 @@ In addition, any BPMN 2.0 process definition, CMMN 1.1 case definitions, DMN 1.1
 In order to make sure that everything is correct, and that the deployment actually worked, add the following lines of code:
 
 ```java
-@SpringBootApplication  
-public class SpringFlowableIntegrationApplication {  
-	public static void main(String[] args) {  
-	    SpringApplication.run(SpringFlowableIntegrationApplication.class, args);  
+@SpringBootApplication
+public class SpringFlowableIntegrationApplication {
+	public static void main(String[] args) {
+	    SpringApplication.run(SpringFlowableIntegrationApplication.class, args);
 	}
-	
-	@Bean  
-	public CommandLineRunner init(final RepositoryService repositoryService, 
-									final RuntimeService runtimeService,  
+
+	@Bean
+	public CommandLineRunner init(final RepositoryService repositoryService,
+									final RuntimeService runtimeService,
 									final TaskService taskService) {
-		return new CommandLineRunner() {  
-	        @Override  
-			public void run(String... strings) throws Exception {  
-	            System.out.println("Number of process definitions : "  
-					+ repositoryService.createProcessDefinitionQuery().count());  
-				System.out.println("Number of tasks : " + taskService.createTaskQuery().count());  
-				
-				runtimeService.startProcessInstanceByKey("oneTaskProcess");  
-				
-				System.out.println("Number of tasks after process start: "  
-					+ taskService.createTaskQuery().count());  
+		return new CommandLineRunner() {
+	        @Override
+			public void run(String... strings) throws Exception {
+	            System.out.println("Number of process definitions : "
+					+ repositoryService.createProcessDefinitionQuery().count());
+				System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
+
+				runtimeService.startProcessInstanceByKey("oneTaskProcess");
+
+				System.out.println("Number of tasks after process start: "
+					+ taskService.createTaskQuery().count());
 			}
 		};
-	}  
+	}
 }
 ```
 
@@ -311,12 +311,12 @@ Number of tasks after process start: 1
 It is very common to use a REST API on top of the embedded Flowable engine, because it allows your application to interact with other micro services. Spring Boot makes this really easy. Add following dependency to the classpath:
 
 ```xml
-<!-- Flowable Spring Boot Starter Rest Api -->  
-<dependency>  
-	<groupId>org.flowable</groupId>  
-	<artifactId>flowable-spring-boot-starter-rest</artifactId>  
-	<version>${flowable.version}</version>  
-</dependency>  
+<!-- Flowable Spring Boot Starter Rest Api -->
+<dependency>
+	<groupId>org.flowable</groupId>
+	<artifactId>flowable-spring-boot-starter-rest</artifactId>
+	<version>${flowable.version}</version>
+</dependency>
 <!-- Flowable Spring Boot Starter Rest Api -->
 ```
 Now, let's create two custom endpoints. One for starting process instances of our previously created BPMN 2.0 process definition, and one for getting the active user tasks.
@@ -324,64 +324,64 @@ Now, let's create two custom endpoints. One for starting process instances of ou
 Create a new class, a Spring service called _MyService_ and create two methods which wrap Flowable calls, but in real-life scenarios this will be more complex.
 
 ```java
-@Service  
+@Service
 public class MyService {
-	@Autowired  
-	private RuntimeService runtimeService;  
-  
-	@Autowired  
-	private TaskService taskService;  
-  
-	@Transactional  
-	public void startProcess() {  
-	    runtimeService.startProcessInstanceByKey("oneTaskProcess");  
-	}  
-  
-    @Transactional  
-	public List<Task> getTasks(String assignee) {  
-	    return taskService.createTaskQuery().taskAssignee(assignee).list();  
-	}  
+	@Autowired
+	private RuntimeService runtimeService;
+
+	@Autowired
+	private TaskService taskService;
+
+	@Transactional
+	public void startProcess() {
+	    runtimeService.startProcessInstanceByKey("oneTaskProcess");
+	}
+
+    @Transactional
+	public List<Task> getTasks(String assignee) {
+	    return taskService.createTaskQuery().taskAssignee(assignee).list();
+	}
 }
 ```
 We can now create a REST endpoint by annotating a class with _@RestController_. Here, we simply delegate to the service defined above.
 
 ```java
-@RestController  
-public class MyRestController {  
-	@Autowired  
-	private MyService myService;  
-  
-	@PostMapping(value="/process")  
-    public void startProcessInstance() {  
-	    myService.startProcess();  
-	}  
-  
-    @RequestMapping(value="/tasks", method= RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)  
-    public List<TaskRepresentation> getTasks(@RequestParam String assignee) {  
-	    List<Task> tasks = myService.getTasks(assignee);  
-		List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();  
+@RestController
+public class MyRestController {
+	@Autowired
+	private MyService myService;
+
+	@PostMapping(value="/process")
+    public void startProcessInstance() {
+	    myService.startProcess();
+	}
+
+    @RequestMapping(value="/tasks", method= RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<TaskRepresentation> getTasks(@RequestParam String assignee) {
+	    List<Task> tasks = myService.getTasks(assignee);
+		List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();
 		for (Task task : tasks)
 	        dtos.add(new TaskRepresentation(task.getId(), task.getName()));
-        return dtos;  
-	}  
-  
+        return dtos;
+	}
+
     static class TaskRepresentation {
-	    private String id;  
-		private String name;  
-  
-		 public TaskRepresentation(String id, String name) {  
-	         this.id = id;  
-			 this.name = name;  
-		 }  
-  
-	     public String getId() { return id; }  
-	     
-	     public void setId(String id) { this.id = id; }  
-        
-	     public String getName() { return name; }  
-        
+	    private String id;
+		private String name;
+
+		 public TaskRepresentation(String id, String name) {
+	         this.id = id;
+			 this.name = name;
+		 }
+
+	     public String getId() { return id; }
+
+	     public void setId(String id) { this.id = id; }
+
+	     public String getName() { return name; }
+
 	     public void setName(String name) { this.name = name; }
-    }  
+    }
 }
 ```
 
@@ -399,19 +399,19 @@ If you would like to know a bit more about Spring Boot production ready features
 In order to make enable Actuator endpoints you need to add a dependency on Actuator. We will take this chance, and also add Spring Boot Actuator's dependency:
 
 ```xml
-<!-- Flowable Spring Boot Starter Actuator -->  
-<dependency>  
-	<groupId>org.flowable</groupId>  
-	<artifactId>flowable-spring-boot-starter-actuator</artifactId>  
-	<version>${flowable.version}</version>  
-</dependency>  
-<!-- Flowable Spring Boot Starter Actuator -->  
-  
-<!-- Starter for using Spring Boot's Actuator which provides production ready features to help you monitor and manage your application -->  
-<dependency>  
-	<groupId>org.springframework.boot</groupId>  
-	<artifactId>spring-boot-starter-actuator</artifactId>  
-</dependency>  
+<!-- Flowable Spring Boot Starter Actuator -->
+<dependency>
+	<groupId>org.flowable</groupId>
+	<artifactId>flowable-spring-boot-starter-actuator</artifactId>
+	<version>${flowable.version}</version>
+</dependency>
+<!-- Flowable Spring Boot Starter Actuator -->
+
+<!-- Starter for using Spring Boot's Actuator which provides production ready features to help you monitor and manage your application -->
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
 <!-- Starter for using Spring Boot's Actuator which provides production ready features to help you monitor and manage your application -->
 ```
 
@@ -449,17 +449,17 @@ Until this moment, we have been using an in-memory H2 database. Lucky us, it has
 In order to enable H2 Console, add the following properties into your `application.properties` file:
 
 ```
-spring.h2.console.enabled=true  
-spring.h2.console.path=/h2-console  
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
 spring.h2.console.settings.trace=true
 ```
 
 By default, Spring Boot configures the application to **connect to an in-memory store with the username  _sa_  and an empty password**. However, we can change those parameters by adding the following properties to the `application.properties` file:
 
 ```
-spring.datasource.username=flowable  
-spring.datasource.password=flowable  
-spring.datasource.url=jdbc:h2:~/flowable-db/db  
+spring.datasource.username=flowable
+spring.datasource.password=flowable
+spring.datasource.url=jdbc:h2:~/flowable-db/db
 spring.datasource.driver-class-name=org.h2.Driver
 ```
 
@@ -475,23 +475,23 @@ Once you log in, you will be able to explore the database and execute queries.
 To change the datasource, simply add the database driver dependencies and provide the URL to the database. For example, to switch to a MySQL database:
 
 ```
-spring.datasource.username=flowable  
-spring.datasource.password=flowable  
+spring.datasource.username=flowable
+spring.datasource.password=flowable
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://mysql-db:3306/flowable?characterEncoding=UTF-8
 ```
 
 Remove H2 from the Maven dependencies and add the MySQL driver to the classpath:
 
-```xml  
-<!-- Databases  MySQL JDBC Type 4 drive -->  
+```xml
+<!-- Databases  MySQL JDBC Type 4 drive -->
 <dependency>
-	<groupId>mysql</groupId>  
-	<artifactId>mysql-connector-java</artifactId>  
-	<scope>runtime</scope>  
-</dependency>  
-<!-- Databases  MySQL JDBC Type 4 drive -->  
-``` 
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+	<scope>runtime</scope>
+</dependency>
+<!-- Databases  MySQL JDBC Type 4 drive -->
+```
 
 ## Summary
 
@@ -500,3 +500,10 @@ In this post, we have shown how to integrate Flowable into your Spring Boot appl
 Please feel free to contact us. We will gladly response to any doubt or question you might have.
 
 Source code can be found in our [GitHub](https://github.com/canchito-dev/spring-flowable-integration) repository.
+
+
+## when Package
+mvn install -Dmaven.plugin.validation=brief
+mvn spring-boot:run
+
+curl http://localhost:8080/actuator
