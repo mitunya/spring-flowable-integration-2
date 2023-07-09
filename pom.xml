@@ -5,7 +5,11 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.1.1</version>
+
+		<!--
 		<version>2.7.13</version>
+		-->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.canchitodev.example</groupId>
@@ -32,10 +36,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>17</java.version>
-		<flowable.version>6.8.0</flowable.version>
+		<flowable.version>7.0.0.M1</flowable.version>
 		<junit.version>4.13</junit.version>
-		<junit.jupiter.version>5.3.2</junit.jupiter.version>
-		<junit.vintage.version>5.3.2</junit.vintage.version>
+		<junit.jupiter.version>5.9.2</junit.jupiter.version>
+		<junit.vintage.version>5.9.2</junit.vintage.version>
 	</properties>
 
 	<dependencies>
@@ -43,8 +47,15 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 		<!-- Starter for building web, including RESTful, applications using Spring MVC. Uses Tomcat as the default embedded container -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+			<version>3.1.1</version>
+		</dependency>
 
 		<!-- H2 Database Engine -->
 		<dependency>
@@ -58,6 +69,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 		<!-- Starter for using Tomcat as the embedded servlet container. Default servlet container starter used by spring-boot-starter-web -->
 
@@ -65,6 +77,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>3.1.0</version>
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
@@ -76,13 +89,18 @@
 		<!-- Starter for testing Spring Boot applications with libraries including JUnit, Hamcrest and Mockito -->
 
 		<!-- Flowable Spring Boot Starter Basic -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.flowable</groupId>
 			<artifactId>flowable-spring-boot-starter-basic</artifactId>
 			<version>${flowable.version}</version>
 		</dependency>
+		-->
 		<!-- Flowable Spring Boot Starter Basic -->
-
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-spring-boot-starter-app</artifactId>
+			<version>${flowable.version}</version>
+		</dependency>
 		<!-- Flowable Spring Boot Starter Rest Api -->
 		<dependency>
 			<groupId>org.flowable</groupId>
@@ -103,6 +121,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 		<!-- Starter for using Spring Boot's Actuator which provides production ready features to help you monitor and manage your application -->
 
@@ -147,6 +166,7 @@
                                 <groupId>org.springframework.boot</groupId>
                                 <artifactId>spring-boot-maven-plugin</artifactId>
                         </plugin>
+
                 </plugins>
         </build>
 
