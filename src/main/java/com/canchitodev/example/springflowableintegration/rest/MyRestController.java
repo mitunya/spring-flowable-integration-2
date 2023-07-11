@@ -36,8 +36,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 public class MyRestController {
@@ -48,6 +50,27 @@ public class MyRestController {
     @PostMapping(value="/process")
     public void startProcessInstance() {
         myService.startProcess();
+    }
+
+    /*
+     /tmp/hello.py
+print('hello from python')
+
+with open('/tmp/x', 'a') as fp:
+  fp.write('aaaaaaaaaaaaaaaaaaaa\n');
+
+
+     */
+    @RequestMapping("/hello")
+    public String hello() {
+        ProcessBuilder pb = new ProcessBuilder("/bin/python", "/tmp/hello.py");
+        try {
+            pb.start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return "SpringBoot!";
     }
 
     @RequestMapping(value="/tasks", method= RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
